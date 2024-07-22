@@ -4,12 +4,15 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-scikit-learn = "==1.5.0"
+scikit-learn = "==1.5.1"
 flask = "*"
 pandas = "*"
-pyarrow = "*"
+numpy = "*"
+mlflow = "*"
+google-auth = "*"
+google-cloud-storage = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.9"
+python_version = "3.10"
