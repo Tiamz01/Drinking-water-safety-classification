@@ -8,7 +8,6 @@ What's inside is more than just rows and columns. You can see water ingredients 
 
 ### Description
 Data attributes are numeric variables and they are listed below:
-
 aluminium - dangerous if greater than 2.8
 ammonia - dangerous if greater than 32.5
 arsenic - dangerous if greater than 0.01

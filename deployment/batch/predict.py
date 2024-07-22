@@ -7,13 +7,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from flask import Flask, jsonify, request
 
-def get_and_clean_data(input_file, is_json=True):
-    if is_json:
-        # Convert JSON to DataFrame
-        df = pd.json_normalize(input_file)
-    else:
-        # Convert CSV to DataFrame
-        df = pd.read_csv(input_file)
+def get_and_clean_data(file):
+    # Read CSV file from request
+    df = pd.read_csv(file)
 
     df.replace('#NUM!', np.nan, inplace=True)
     df.dropna(inplace=True)
@@ -52,28 +48,20 @@ def load_model():
 
 model = load_model()
 
+
 app = Flask('Drinking-water-safety-prediction')
 
 @app.route('/predict', methods=['POST'])
 def predict_endpoint():
     try:
-        if request.content_type == 'application/json':
-            data = request.get_json()
-            if not data:
-                return jsonify({'error': 'No data provided'}), 400
-            df = get_and_clean_data(data, is_json=True)
+        if 'file' not in request.files:
+            return jsonify({'error': 'No file part in the request'}), 400
+        file = request.files['file']
+        if file.filename == '':
+            return jsonify({'error': 'No selected file'}), 400
         
-        elif 'multipart/form-data' in request.content_type:
-            if 'file' not in request.files:
-                return jsonify({'error': 'No file part in the request'}), 400
-            file = request.files['file']
-            if file.filename == '':
-                return jsonify({'error': 'No selected file'}), 400
-            df = get_and_clean_data(file, is_json=False)
+        df = get_and_clean_data(file)
         
-        else:
-            return jsonify({'error': 'Unsupported media type'}), 415
-
         if 'is_safe' not in df.columns:
             return jsonify({'error': "'is_safe' column is missing from the data."}), 400
         
