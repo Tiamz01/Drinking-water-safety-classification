@@ -1,0 +1,6 @@
+scikit-learn
+pandas
+xgboost
+mlflow
+seaborn
+numpy

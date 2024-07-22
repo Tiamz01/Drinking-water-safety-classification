@@ -1,0 +1,20 @@
+artifact_path: model/log_reg_WQC_model
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.10.14
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.5.1
+mlflow_version: 2.14.3
+model_size_bytes: 649527
+model_uuid: ff3f8ce5fc53403a9d2424262a3e21f5
+run_id: 86fd7fec5ecc409fbb3851ce804d5e77
+utc_time_created: '2024-07-20 12:51:40.238295'
