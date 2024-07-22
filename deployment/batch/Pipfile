@@ -11,6 +11,7 @@ numpy = "*"
 mlflow = "*"
 google-auth = "*"
 google-cloud-storage = "*"
+requests = "*"
 
 [dev-packages]
 
