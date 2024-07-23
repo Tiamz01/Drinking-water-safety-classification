@@ -18,6 +18,8 @@ This project focuses on building an end-to-end machine learning operations (MLOp
 - **GCP PostgreSQL Database**: Set up a GCP PostgreSQL database as the backend store for MLflow to manage experiment metadata.
 - **Google Cloud Storage Bucket**: Configured a Google Cloud Storage bucket to store model artifacts and other related files.
 
+-- Incase the GCP service get disrupted, the code is configure to use the model saved as local binary file.
+
 ### Model Deployment
 - **Flask Application**: Developed a Flask application to serve the trained model as a web service.
 - **Docker**: Containerized the Flask application using Docker to ensure consistency across different deployment environments.
