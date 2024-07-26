@@ -38,12 +38,20 @@ Thanks to MLOps ZoomCamp for the reason to learn many new tools!
 - **Logistic Regression**: Implemented and trained a logistic regression model to classify water quality.
 - **Gradient Boosting Classifier**: Implemented and trained a gradient boosting classifier to improve classification performance.
 
+After the traing the model with the higest f1 score is logged as the best model
+
 ### Experiment Tracking
 - **MLflow Integration**: Utilized MLflow to track experiments, including hyperparameter tuning and model performance metrics.
 - **GCP PostgreSQL Database**: Set up a GCP PostgreSQL database as the backend store for MLflow to manage experiment metadata.
 - **Google Cloud Storage Bucket**: Configured a Google Cloud Storage bucket to store model artifacts and other related files.
 
 -- Incase the GCP service get disrupted, the code is configure to use the model saved as local binary file.
+
+### Model Orchestration
+- The model training pipeline orchestration was done prefect to successfully track the workflow and deployment of the model.
+
+- To view it on the prefect UI, RUN the water_cls.py on the terminal after activating the orchestration environment
+![Water Quality](https://example.com/water_quality_image.png)
 
 ### Model Deployment
 - **Flask Application**: Developed a Flask application to serve the trained model as a web service.
