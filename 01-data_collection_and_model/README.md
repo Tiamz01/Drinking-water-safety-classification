@@ -29,7 +29,6 @@ selenium - dangerous if greater than 0.5
 silver - dangerous if greater than 0.1
 uranium - dangerous if greater than 0.3
 is_safe - class attribute {0 - not safe, 1 - safe}
-Inspiration
-Idea was to create dataset that is good for binary classification and that gives adequate results.
+
 
 data source:https://www.kaggle.com/datasets/mssmartypants/water-quality/data..

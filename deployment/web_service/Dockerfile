@@ -1,5 +1,5 @@
 # Stage 1: Install dependencies
-FROM python:3.10-slim AS builder
+FROM python:3.10-slim AS image
 
 # Install pipenv and dependencies
 RUN pip install --upgrade pip \
@@ -28,17 +28,17 @@ RUN apt-get update && apt-get install -y curl \
 WORKDIR /app
 
 # Copy dependencies from the builder stage
-COPY --from=builder /usr/local/lib/python3.10/site-packages /usr/local/lib/python3.10/site-packages
-COPY --from=builder /usr/local/bin /usr/local/bin
+COPY --from=image /usr/local/lib/python3.10/site-packages /usr/local/lib/python3.10/site-packages
+COPY --from=image /usr/local/bin /usr/local/bin
 
 # Copy the application files and model binary
 COPY [predict.py" "best_log_reg.bin" "./"]
 
 # Copy GCS credentials if needed
-# COPY path/to/your/credentials.json /app/credentials.json
+# COPY /home/t.sukanmi/ProjectCLS/mlops-429011-853523c01da8.json /app/credentials.json
 
 # Set environment variable for GCS credentials
-# ENV GOOGLE_APPLICATION_CREDENTIALS="/app/credentials.json"
+# ENV GOOGLE_APPLICATION_CREDENTIALS="/home/t.sukanmi/ProjectCLS/mlops-429011-853523c01da8.json"
 
 # Expose port 9696
 EXPOSE 9696
