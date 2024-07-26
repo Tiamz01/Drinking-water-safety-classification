@@ -38,7 +38,8 @@ Thanks to MLOps ZoomCamp for the reason to learn many new tools!
 - **Logistic Regression**: Implemented and trained a logistic regression model to classify water quality.
 - **Gradient Boosting Classifier**: Implemented and trained a gradient boosting classifier to improve classification performance.
 
-After the training, the model with the highest f1 score is logged as the best model
+After the training, the model with the highest f1 score is logged as the best model.
+
 
 ### Experiment Tracking
 - **MLflow Integration**: Utilized MLflow to track experiments, including hyperparameter tuning and model performance metrics.
@@ -46,15 +47,27 @@ After the training, the model with the highest f1 score is logged as the best mo
 - **Google Cloud Storage Bucket**: Configured a Google Cloud Storage bucket to store model artifacts and other related files.
 
 -- In case the GCP service gets disrupted, the code is configured to use the model saved as a local binary file.
-[View the model tracking and registry here]([https://example.com](http://35.192.179.167:5000/))
-![Water Quality](https://example.com/water_quality_image.png)
+
+
+```bash
+mlflow server -h 0.0.0.0 -p 5000 --backend-store-uri postgresql://waterDB:padlock02@10.110.160.4:5432/mlflow --default-artifact-root gs://water_quality_model 
+```
+
+[View the model tracking and registry here]([http://35.192.179.167:5000/)])
+![Experiment tracking](exp_tracking.png)
+![Model Registry](model_registry.png)
 
 
 ### Model Orchestration
 - The model training pipeline orchestration was done prefect to successfully track the workflow and deployment of the model.
 
 - To view it on the prefect UI, RUN the water_cls.py on the terminal after activating the orchestration environment
-![Water Quality](https://example.com/water_quality_image.png)
+```bash
+    conda activate orchestration
+    pip install -r requirements.txt
+    python water_cls.py
+    ```
+![Orchestration](model_registry.png)
 
 ### Model Deployment
 - **Flask Application**: Developed a Flask application to serve the trained model as a web service.
@@ -84,6 +97,33 @@ Test prediction service
 Deployment and Monitoring
 Best practices
 
+## Setup Instructions
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/yourusername/fashion-mnist-classifier.git
+    cd fashion-mnist-classifier
+    ```
+
+2. Install dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3. Download the data:
+    ```bash
+    python download_data.py
+    ```
+
+4. Train the model:
+    ```bash
+    python scripts/train.py
+    ```
+
+5. Run the web application:
+    ```bash
+    python src/main.py
+    ```
 
 
 Monitoring is under development yet (adding Evidently AI).
