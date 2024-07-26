@@ -1,30 +1,30 @@
 # End-to-End MLOps Water Quality Classification Project
 
 ## Overview
-This project focuses on building an end-to-end machine learning operations (MLOps) pipeline for a drink water quality amd safety classification task. The key steps include obtaining and cleaning the data, training models, tracking experiments using MLflow, and deploying the model as a web service using Flask, Docker, and Google Cloud Platform (GCP) services for storage and database management.
+This project focuses on building an end-to-end machine learning operations (MLOps) pipeline for a drinking water quality and safety classification task. The key steps include obtaining and cleaning the data, training models, tracking experiments using MLflow, and deploying the model as a web service using Flask, Docker, and Google Cloud Platform (GCP) services for storage and database management.
 
 ## Problem statement
-Ensuring access to safe drinking water is a critical public health priority. Contaminated water can lead to severe health issues, and thus, timely and accurate assessment of water quality is essential. Traditional methods for testing water safety are often resource-intensive, requiring specialized equipment and expertise. These methods can be impractical for remote or under-resourced areas.
+Ensuring access to safe drinking water is a critical public health priority. Contaminated water can lead to severe health issues; thus, timely and accurate assessment of water quality is essential. Traditional methods for testing water safety are often resource-intensive, requiring specialized equipment and expertise. These methods can be impractical for remote or under-resourced areas.
 
 To address this challenge, we propose leveraging machine learning techniques to classify drinking water safety based on readily available data. By utilizing fast and lightweight ML libraries that can run on CPUs, we aim to create an accessible solution that can be deployed on inexpensive hosting platforms. This approach will enable communities, even those with limited resources, to assess water quality efficiently and take necessary actions to ensure safe drinking water.
 
-The goal of this project is to develop a robust, cost-effective machine learning model for classifying drinking water safety, making it feasible for widespread use in various settings without the need for extensive technical infrastructure.
+This project aims to develop a robust, cost-effective machine learning model for classifying drinking water safety, making it feasible for widespread use in various settings without the need for extensive technical infrastructure.
 
 ## 🎯 Goals
-This is my MLOps project started during MLOps ZoomCamp'24.
+This is my MLOps project that started during MLOps ZoomCamp'24.
 
-And the main goal is straight-forward: build an end-to-end Machine Learning project:
+And the main goal is straightforward: build an end-to-end Machine Learning project:
 
 choose dataset
 load & analyze data, preprocess it
 train & test ML model
 create a model training pipeline
 deploy the model (as a web service)
-finally monitor performance
+finally, monitor the performance
 And follow MLOps best practices!
 
-Dataset is gotten from kaggle dataset. More about the data can be found in the Data collect and model readme file
-Data source:https://www.kaggle.com/datasets/mssmartypants/water-quality/data..
+The dataset is obtained from the Kaggle dataset. More about the data can be found in the Data collection and model readme file
+Data source:https://www.kaggle.com/datasets/mssmartypants/water-quality/data.
 
 Thanks to MLOps ZoomCamp for the reason to learn many new tools!
 
@@ -32,20 +32,23 @@ Thanks to MLOps ZoomCamp for the reason to learn many new tools!
 
 ### Data Acquisition and Cleaning
 - **Data Collection**: Obtained the water quality dataset from a reliable source.
-- **Data Cleaning**: Performed data preprocessing to handle missing values, outliers, and data normalization to ensure the data is ready for model training.
+- **Data Cleaning**: Performed data preprocessing to handle missing values, outliers, and normalization to ensure the data is ready for model training.
 
 ### Model Training
 - **Logistic Regression**: Implemented and trained a logistic regression model to classify water quality.
 - **Gradient Boosting Classifier**: Implemented and trained a gradient boosting classifier to improve classification performance.
 
-After the traing the model with the higest f1 score is logged as the best model
+After the training, the model with the highest f1 score is logged as the best model
 
 ### Experiment Tracking
 - **MLflow Integration**: Utilized MLflow to track experiments, including hyperparameter tuning and model performance metrics.
 - **GCP PostgreSQL Database**: Set up a GCP PostgreSQL database as the backend store for MLflow to manage experiment metadata.
 - **Google Cloud Storage Bucket**: Configured a Google Cloud Storage bucket to store model artifacts and other related files.
 
--- Incase the GCP service get disrupted, the code is configure to use the model saved as local binary file.
+-- In case the GCP service gets disrupted, the code is configured to use the model saved as a local binary file.
+[View the model tracking and registry here]([https://example.com](http://35.192.179.167:5000/))
+![Water Quality](https://example.com/water_quality_image.png)
+
 
 ### Model Orchestration
 - The model training pipeline orchestration was done prefect to successfully track the workflow and deployment of the model.
