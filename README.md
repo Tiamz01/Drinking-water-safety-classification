@@ -69,12 +69,22 @@ mlflow server -h 0.0.0.0 -p 5000 --backend-store-uri postgresql://waterDB:padloc
     ```
 ![Orchestration](model_registry.png)
 
+
 ### Model Deployment
 - **Flask Application**: Developed a Flask application to serve the trained model as a web service.
 - **Docker**: Containerized the Flask application using Docker to ensure consistency across different deployment environments.
 - **Google Cloud Platform (GCP)**: 
   - **Google Cloud Run**: Configured Google Cloud Run to deploy the Dockerized Flask application as a scalable web service.
   - **Google Cloud Storage**: Utilized Google Cloud Storage to load the trained model artifacts in the web service.
+
+- Building the docker image
+    ```bash
+    docker build -t drinkng-water-safety-clasification-prediction-service:v1 .
+    ```
+- Running the deployed model after conrenarization.
+    ```bash
+    docker run -it --rm -p 9696:9696  drinkng-water-safety-clasification-prediction-service:v1
+    ```
 
 
 🧰 Tech stack
