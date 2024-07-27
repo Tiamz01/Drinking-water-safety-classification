@@ -33,7 +33,7 @@ def feature_engineering(df, is_prediction=True):
 
 def load_model():
     try:
-        print('Loading model from GCS...')
+        print('Loading model from GCP bucket...')
         model_uri = "gs://water_quality_model/1/b148d239d6b84b08961892fe7b8dfc95/artifacts/model/gb_model"
         model = mlflow.sklearn.load_model(model_uri)
         print("Model loaded from GCS.")
