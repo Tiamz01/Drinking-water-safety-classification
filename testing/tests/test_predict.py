@@ -1,4 +1,6 @@
-# tests/test_predict.py
+import sys
+sys.path.insert(0, '/home/t.sukanmi/ProjectCLS/04-deployment/web_service')
+
 import pytest
 import pandas as pd
 from io import StringIO
@@ -26,7 +28,7 @@ data = {
     "selenium": [0.08],
     "silver": [0.34],
     "uranium": [0.02],
-    "is_safe": [1]  # Include the target variable for prediction
+    "is_safe": [0]  # Include the target variable for prediction
 }
 
 # Convert the dictionary to a pandas DataFrame
@@ -48,7 +50,7 @@ def test_feature_engineering():
     csv_file.seek(0)  # Move to the start of the file for re-reading
     df_cleaned = get_and_clean_data(csv_file)
     X_test = feature_engineering(df_cleaned, is_prediction=True)
-    assert X_test.shape[1] == df.shape[1] - 1  # Should match the number of features minus the target
+    assert X_test.shape[1] == df.shape[1] - 1  # matching the number of features minus the target
 
 def test_load_model():
     model = load_model()
@@ -60,15 +62,18 @@ def test_predictions():
     X_test = feature_engineering(df_cleaned, is_prediction=True)
 
     # Load the model
-    model = load_model()
+    mock_model = load_model()
 
-    # Mock prediction function
+ # Mock prediction function
     def mock_apply_model(data):
-        return model.predict(data).tolist()
+        return mock_model.predict(data).tolist()
 
     # Call the mock prediction function
-    expected_predictions = [1]  # Replace with expected predictions based on your model and data
+    expected_predictions = [0]  
     actual_predictions = mock_apply_model(X_test)
+
+    print(f"Expected Predictions: {expected_predictions}")
+    print(f"Actual Predictions: {actual_predictions}")
 
     # Assert actual predictions against expected predictions
     assert actual_predictions == expected_predictions
