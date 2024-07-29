@@ -48,18 +48,19 @@ After the training, the model with the highest f1 score is logged as the best mo
 
 -- In case the GCP service gets disrupted, the code is configured to use the model saved as a local binary file.
 
+**mlflow server setup**
 
 ```bash
 mlflow server -h 0.0.0.0 -p 5000 --backend-store-uri postgresql://waterDB:padlock02@10.110.160.4:5432/mlflow --default-artifact-root gs://water_quality_model 
 ```
 
 [View the model tracking and registry here]([http://35.192.179.167:5000/)])
-![Experiment tracking](exp_tracking.png)
-![Model Registry](model_registry.png)
+![Experiment tracking](images/exp_tracking.png)
+![Model Registry](images/model_registry.png)
 
 
 ### Model Orchestration
-- The model training pipeline orchestration was done prefect to successfully track the workflow and deployment of the model.
+- The model training pipeline orchestration was done with Prefect to successfully track the workflow and deployment of the model.
 
 - To view it on the prefect UI, RUN the water_cls.py on the terminal after activating the orchestration environment
 ```bash
@@ -67,7 +68,7 @@ mlflow server -h 0.0.0.0 -p 5000 --backend-store-uri postgresql://waterDB:padloc
     pip install -r requirements.txt
     python water_cls.py
     ```
-![Orchestration](model_registry.png)
+![Orchestration](images/model_registry.png)
 
 
 ### Model Deployment
@@ -77,15 +78,53 @@ mlflow server -h 0.0.0.0 -p 5000 --backend-store-uri postgresql://waterDB:padloc
   - **Google Cloud Run**: Configured Google Cloud Run to deploy the Dockerized Flask application as a scalable web service.
   - **Google Cloud Storage**: Utilized Google Cloud Storage to load the trained model artifacts in the web service.
 
+
+
+- Navigate to the web_service Directory
+    ```bash
+    cd web_service
+    ```
 - Building the docker image
     ```bash
     docker build -t drinkng-water-safety-clasification-prediction-service:v1 .
     ```
-- Running the deployed model after conrenarization.
+- To start the web service, use the following command.
     ```bash
     docker run -it --rm -p 9696:9696  drinkng-water-safety-clasification-prediction-service:v1
     ```
 
+### Setup Instructions
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/yourusername/fashion-mnist-classifier.git
+    cd fashion-mnist-classifier
+    ```
+### Running Unit Tests
+Unit tests are located in the testing/tests directory. To run unit tests using pytest:
+
+Navigate to the testing Directory
+```bash
+    cd testing
+```
+Then Run the tests
+```bash
+    pytest tests/test_predict.py
+```
+### Integration Testing with Docker Compose using Googlecloud
+Integration tests ensure that the Docker setup and application work together correctly. This is performed using Docker Compose.
+
+- Navigate to the testing Directory
+```bash
+    cd testing
+```
+
+Build and Run the Integration Tests
+```bash
+    docker-compose up --build --abort-on-container-exit --exit-code-from test
+```
+
+Monitoring is under development yet (adding Evidently AI).
 
 🧰 Tech stack
 Python for data processing and model implementation
@@ -106,37 +145,6 @@ Train model
 Test prediction service
 Deployment and Monitoring
 Best practices
-
-## Setup Instructions
-
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/yourusername/fashion-mnist-classifier.git
-    cd fashion-mnist-classifier
-    ```
-
-2. Install dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-3. Download the data:
-    ```bash
-    python download_data.py
-    ```
-
-4. Train the model:
-    ```bash
-    python scripts/train.py
-    ```
-
-5. Run the web application:
-    ```bash
-    python src/main.py
-    ```
-
-
-Monitoring is under development yet (adding Evidently AI).
 
 Best practices
 * [x] Unit tests
