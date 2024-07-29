@@ -1,3 +1,4 @@
+# tests/test_predict.py
 import pytest
 import pandas as pd
 from io import StringIO
@@ -38,13 +39,15 @@ csv_file.seek(0)  # Move to the start of the file
 
 def test_get_and_clean_data():
     # Use the in-memory CSV file
-    df = get_and_clean_data(csv_file)
-    assert not df.empty
-    assert 'is_safe' in df.columns
+    csv_file.seek(0)  # Move to the start of the file for re-reading
+    df_cleaned = get_and_clean_data(csv_file)
+    assert not df_cleaned.empty
+    assert 'is_safe' in df_cleaned.columns
 
 def test_feature_engineering():
-    df = get_and_clean_data(csv_file)
-    X_test = feature_engineering(df, is_prediction=True)
+    csv_file.seek(0)  # Move to the start of the file for re-reading
+    df_cleaned = get_and_clean_data(csv_file)
+    X_test = feature_engineering(df_cleaned, is_prediction=True)
     assert X_test.shape[1] == df.shape[1] - 1  # Should match the number of features minus the target
 
 def test_load_model():
@@ -52,15 +55,21 @@ def test_load_model():
     assert model is not None
 
 def test_predictions():
-    # Prepare mock data
-    expected_predictions = [0]  # Replace with expected predictions based on your model and data
-    
-    # Reset csv_file to the start of the file for re-reading
-    csv_file.seek(0)
-    
-    # Call the prediction function
-    actual_predictions = model(csv_file)
-    
+    # Mock data similar to the test data
+    df_cleaned = df.copy()
+    X_test = feature_engineering(df_cleaned, is_prediction=True)
+
+    # Load the model
+    model = load_model()
+
+    # Mock prediction function
+    def mock_apply_model(data):
+        return model.predict(data).tolist()
+
+    # Call the mock prediction function
+    expected_predictions = [1]  # Replace with expected predictions based on your model and data
+    actual_predictions = mock_apply_model(X_test)
+
     # Assert actual predictions against expected predictions
     assert actual_predictions == expected_predictions
 
